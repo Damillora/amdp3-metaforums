@@ -1,5 +1,5 @@
 <?php
-namespace Mitsumine\Services;
+namespace Application\Services;
 
 class ServiceContainer{
     private static $services = [];
@@ -10,7 +10,7 @@ class ServiceContainer{
         return self::$services[$service];
     }
     public static function load($service) {
-        $class = 'Mitsumine\\Services\\'.$service;
+        $class = 'Application\\Services\\'.$service;
         self::$services[$service] = new $class();
     }
     public static function __callStatic($name, $args) {
