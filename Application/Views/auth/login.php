@@ -1,5 +1,5 @@
 <?php
-include 'layouts/head.php';
+$view->include('layouts/head');
 ?>
 <div id="login">
   <form action="/login" method="POST" id="login">
@@ -9,6 +9,9 @@ include 'layouts/head.php';
     </div>
     <div class="input-group">
       <input type="password" name="password" id="password" placeholder="password" v-model="password"></input>
+    </div>
+    <div class="input-group">
+      <a href="/login/forget">I forgot my password</a>
     </div>
     <div id="errors" v-if="errors != ''">
       <p>{{ errors }}</p>
@@ -32,15 +35,6 @@ var app = new Vue({
       var emailre = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       var emailvalid = emailre.test(String(this.email).toLowerCase()) ;
 
-      if(this.username == "") {
-          this.errors = "Username must not be empty";
-          e.preventDefault();
-          return false;
-      } else if(this.password == "") {
-          this.errors = "Password must not be empty";
-          e.preventDefault();
-          return false;
-      }
       this.errors = "";
       return true;
     }
@@ -48,5 +42,5 @@ var app = new Vue({
 });
 </script>
 <?php
-include 'layouts/foot.php';
+$view->include('layouts/foot');
 ?>

@@ -4,12 +4,17 @@ namespace Application\Foundations;
 class QueryBuilder {
     private $query = "";
     private $where = "";
+    private $misc = "";
     public function select($fields) {
         if(!is_array($fields)) {
             $this->query .= "SELECT ".$fields;
         } else {
             $this->query .= "SELECT ".implode(",",SQLHelper::encode_list($fields));
         }
+        return $this;
+    }
+    public function orderBy($column, $order = 'asc') {
+        $this->misc .= " ORDER BY ".$column." ".strtoupper($order);
         return $this;
     }
     public function delete() {
@@ -32,7 +37,7 @@ class QueryBuilder {
     }
     public function from($table) {
         // TODO: SQL injection
-        $this->query .= " FROM ".$table;
+        $this->query .= " FROM `".$table."`";
         return $this;
     }
     public function where($a, $b, $c = null) {
@@ -56,6 +61,26 @@ class QueryBuilder {
         }
         return $this;
     }
+    public function whereIn($a, $b) {
+        $field = $a;
+        $value = SQLHelper::encode_list($b);
+        if($this->where == "") {
+            $this->where .= " WHERE ".$field." IN (".implode(",",$value).")";
+        } else {
+            $this->where .= " AND ".$field." IN (".implode(",",$value).")";
+        }
+        return $this;
+    }
+    public function whereNotIn($a, $b) {
+        $field = $a;
+        $value = SQLHelper::encode_list($b);
+        if($this->where == "") {
+            $this->where .= " WHERE ".$field." NOT IN (".implode(",",$value).")";
+        } else {
+            $this->where .= " AND ".$field." NOT IN (".implode(",",$value).")";
+        }
+        return $this;
+    }
     public function orWhere($a, $b, $c = null) {
         $field = "";
         $value = "";
@@ -69,6 +94,7 @@ class QueryBuilder {
             $value = $c;
             $operator = $b;
         }
+        $value = SQLHelper::encode_literal($value);
         if($this->where == "") {
             $this->where .= " WHERE ".$field." ".$operator." ".$value;
         } else {
@@ -77,6 +103,6 @@ class QueryBuilder {
         return $this;
     }
     public function build() {
-        return $this->query.$this->where;
+        return $this->query.$this->where.$this->misc;
     }
 }

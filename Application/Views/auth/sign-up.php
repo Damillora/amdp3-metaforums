@@ -1,5 +1,5 @@
 <?php
-include 'layouts/head.php';
+$view->include('layouts/head');
 ?>
 <div id="signup">
   <form action="/signup" method="POST" id="signup">
@@ -72,5 +72,5 @@ var app = new Vue({
 });
 </script>
 <?php
-include 'layouts/foot.php';
+$view->include('layouts/foot');
 ?>

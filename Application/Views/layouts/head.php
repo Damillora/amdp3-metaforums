@@ -1,7 +1,8 @@
 <html>
   <head>
     <link href="/css/metaforums.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="/js/vue.js"></script>
+    <script src="/js/jquery.min.js"></script>
     <title>Metaforums</title>
   </head>
   <body>
@@ -12,6 +13,9 @@
       <div class="header-middle">
       </div>
       <div class="header-left">
+        <?php if($auth->isModerator()) { ?>
+        <a href="/moderation" class="header-link">User Management</a>
+        <?php } ?>
         <?php if($auth->isLoggedIn()) { ?>
         <a href="/logout" class="header-link">Logout</a>
         <?php } else {?>

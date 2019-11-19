@@ -2,6 +2,8 @@
 
 require 'autoload.php';
 
+date_default_timezone_set('Asia/Jakarta');
+
 // Use helper classes from Application
 use Application\HTTP\Request;
 use Application\HTTP\Response;
@@ -39,9 +41,8 @@ $request_method = $_SERVER['REQUEST_METHOD'];
 
 // Get current route from uri
 if(!array_key_exists($request_method.':'.$uri,$routes)) {
-    http_response_code(404);
-    header('Content-Type: application/json');
-    die(json_encode([ 'success' => false, 'error' => 'Not found' ]));
+    $response->statusCode(404)->view('404')->render();
+    die();
 }
 
 $route = $routes[$request_method.':'.$uri];

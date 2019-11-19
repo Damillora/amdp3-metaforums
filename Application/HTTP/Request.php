@@ -12,6 +12,7 @@ class Request {
         return $this->query;
     }
     function __get($prop) {
+        if(!array_key_exists($prop,$this->data)) return "";
         return $this->data[$prop];
     }
     function __set($prop, $val) {

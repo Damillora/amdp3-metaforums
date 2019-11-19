@@ -32,7 +32,7 @@ class Database {
          if($result) {
              return mysqli_fetch_all($result,MYSQLI_ASSOC);
          } else {
-             return null;
+             return mysqli_error($this->conn);
          }
     }
 
