@@ -107,7 +107,7 @@ class AuthController {
     }
     public function login_check(Request $request, Response $response) {
         $query = new QueryBuilder();
-        $query = $query->where('username',$request->username)->orWhere('email',$request->username);
+        $query = $query->where('is_deactivated',0)->where('username',$request->username)->orWhere('email',$request->username)->where('is_deactivated',0);
         $result = User::selectOne($query);
         if($result == null) {
             if(filter_var($request->username,FILTER_VALIDATE_EMAIL)) {

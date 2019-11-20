@@ -23,7 +23,28 @@ $uri = substr($uri,strlen('/index.php'),strlen($uri)-strlen('/index.php'));
 
 // Serve static files first
 if(file_exists('Application/Static'.$uri) && $uri != '') {
+    $extension = pathinfo('Application/Static'.$uri, PATHINFO_EXTENSION);
+    if($extension == "js") {
+        header("Content-Type: text/javascript");
+    } else if($extension == "css") {
+        header("Content-Type: text/css");
+    } else {
+        header("Content-Type: ".mime_content_type('Application/Static'.$uri));
+    }
     readfile('Application/Static'.$uri);
+    exit;
+}
+
+if(file_exists('Application/Storage'.$uri) && $uri != '') {
+    $extension = pathinfo('Application/Storage'.$uri, PATHINFO_EXTENSION);
+    if($extension == "js") {
+        header("Content-Type: text/javascript");
+    } else if($extension == "css") {
+        header("Content-Type: text/css");
+    } else {
+        header("Content-Type: ".mime_content_type('Application/Storage'.$uri));
+    }
+    readfile('Application/Storage'.$uri);
     exit;
 }
 

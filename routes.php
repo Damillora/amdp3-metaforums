@@ -39,10 +39,43 @@ return [
   'GET:/api/get_threads' => [
     'controller' => 'ApiController@threads',
   ],
+  'GET:/api/favorite' => [
+    'controller' => 'ApiController@favorite',
+  ],
+  'GET:/api/favorite_num' => [
+    'controller' => 'ApiController@favorite_num',
+  ],
+  'GET:/api/get_reports' => [
+    'controller' => 'ApiController@reports',
+  ],
   'GET:/thread' => [
     'controller' => 'ForumThreadController@forum',
   ],
   'GET:/thread/editor' => [
     'controller' => 'ForumThreadController@editor',
+  ],
+  'GET:/thread/moderating_editor' => [
+    'controller' => 'ForumThreadController@moderating_editor',
+  ],
+  'POST:/thread/process' => [
+    'controller' => 'ForumThreadController@process',
+  ],
+  'POST:/thread/moderate' => [
+    'controller' => 'ForumThreadController@moderate',
+  ],
+  'GET:/thread/unlock' => [
+    'controller' => 'ForumThreadController@unlock',
+  ],
+  'GET:/profile' => [
+    'controller' => 'AccountController@profile',
+  ],
+  'GET:/me' => [
+    'controller' => 'AccountController@me',
+  ],
+  'POST:/me/update' => [
+    'controller' => 'AccountController@update',
+  ],
+  'GET:/moderation' => [
+    'controller' => 'IndexController@moderation',
   ],
 ];

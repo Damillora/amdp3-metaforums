@@ -13,6 +13,14 @@ class QueryBuilder {
         }
         return $this;
     }
+    public function selectDistinct($fields) {
+        if(!is_array($fields)) {
+            $this->query .= "SELECT DISTINCT ".$fields;
+        } else {
+            $this->query .= "SELECT DISTINCT ".implode(",",SQLHelper::encode_list($fields));
+        }
+        return $this;
+    }
     public function orderBy($column, $order = 'asc') {
         $this->misc .= " ORDER BY ".$column." ".strtoupper($order);
         return $this;
@@ -38,6 +46,10 @@ class QueryBuilder {
     public function from($table) {
         // TODO: SQL injection
         $this->query .= " FROM `".$table."`";
+        return $this;
+    }
+    public function join($table, $condition) {
+        $this->query .= " JOIN ".$table." ON ".$condition;
         return $this;
     }
     public function where($a, $b, $c = null) {
@@ -100,6 +112,10 @@ class QueryBuilder {
         } else {
             $this->where .= " OR ".$field." ".$operator." ".$value;
         }
+        return $this;
+    }
+    public function limit($limit) {
+        $this->misc .= " LIMIT ".$limit;
         return $this;
     }
     public function build() {

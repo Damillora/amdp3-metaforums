@@ -9,6 +9,32 @@ An online web-based discussion forum application
 3. Modify backend/config.php and adjust the configuration as needed.
 4. Point the browser to `localhost`
 
+## Sample database data
+### Users
+1. Username: Administrator
+   Password: yuikaadmin
+   Role: Site Admin
+2. Username: YuikaMitsumine
+   Password: producertan
+   Role: Idolmaster Shiny Colors Moderator
+3. Username: AsahiSerizawa
+   Password: asahizzu
+   Role: Idolmaster Shiny Colors Moderator
+4. Username: YurikoNanao
+   Password: toumeinaprologue
+   Role: Idolmaster Million Live Moderator
+5. Username: JunnaHoshimi
+   Password: shakespeare
+   Role: Revue Starlight Moderator
+6. Username: SuddenVisitor
+   Password: omegadim
+   Role: User
+7. Username: MusubiTendouji
+   Password: nanasisters
+   Role: User
+### Post sources
+
+
 ## Project Structure
 
 - index.php

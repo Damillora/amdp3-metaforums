@@ -19,6 +19,12 @@ class Thread extends DBModel {
     public function elapsed_created_attribute() {
         return DateHelper::elapsedString($this->created_at);
     }
+    public function thread_age_attribute() {
+        $query = new QueryBuilder();
+        $query = $query->where('thread_id',$this->id)->orderBy('created_at','desc');
+        $post = Post::selectOne($query);
+        return time() - strtotime($post->created_at);
+    }
     public function last_reply_attribute() { 
         $query = new QueryBuilder();
         $query = $query->where('thread_id',$this->id)->orderBy('created_at','desc');
@@ -43,7 +49,18 @@ class Thread extends DBModel {
         return $post;
     }
     public function category() {
-        $category = Category::Find($this->category_id);
+        $category = Category::find($this->category_id);
         return $category;
     }
+    public function isLocked() {
+        $action = $this->lock();
+        return isset($action);
+    }
+    public function lock() {
+       $where = new QueryBuilder();
+       $where = $where->where('thread_id',$this->id)->where('action_type','lock')->where('expired_at','>',date('Y-m-d H:i:s'))->orderBy('expired_at','desc');
+       $actions = UserAction::selectOne($where);
+       return $actions;
+    }
+
 }
