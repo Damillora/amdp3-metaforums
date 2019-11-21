@@ -10,7 +10,9 @@ An online web-based discussion forum application
 4. Point the browser to `localhost`
 
 ## Sample database data
+
 ### Users
+
 1. Username: Administrator
    Password: yuikaadmin
    Role: Site Admin
@@ -32,6 +34,10 @@ An online web-based discussion forum application
 7. Username: MusubiTendouji
    Password: nanasisters
    Role: User
+8. Username: BadEnd
+   Password: communicate
+   Role: User
+
 ### Post sources
 
 

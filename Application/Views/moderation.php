@@ -42,7 +42,7 @@ var selectapp = new Vue({
         this.current_category = id;
         this.current_report = 0;
         this.reports = [];
-        window.history.pushState('category-'+id,'','<?php echo $root; ?>/moderation?category='+id+window.location.hash);
+        if(id != 0) window.history.pushState('category-'+id,'','<?php echo $root; ?>/moderation?category='+id+window.location.hash);
         $.ajax("<?php echo $root; ?>/api/get_reports?id="+id)
           .done(function(data) { 
             this.reports = data;

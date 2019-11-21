@@ -12,7 +12,7 @@
 <p class="">You cannot delete this post.</p>
 <?php } else if(isset($category) && $auth->user()->is_confirmed == 0 ) { ?>
 <p class="">Please confirm your email address to create threads</p>
-<?php } else if(isset($thread) && $thread->isLocked() ) { ?>
+<?php } else if(isset($thread) && $thread->isLocked() && !isset($report) ) { ?>
 This thread has been locked.
 <?php } else { ?>
 <div id="editor-comp">

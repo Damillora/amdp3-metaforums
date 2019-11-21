@@ -9,7 +9,7 @@ return [
   'POST:/signup' => [
     'controller' => 'AuthController@create_user',
   ],
-  'GET:/signup/confirm' => [
+  'GET:/email/confirm' => [
     'controller' => 'AuthController@sign_up_confirm',
   ],
   'GET:/login' => [ 
@@ -74,6 +74,12 @@ return [
   ],
   'POST:/me/update' => [
     'controller' => 'AccountController@update',
+  ],
+  'POST:/me/update-account' => [
+    'controller' => 'AccountController@update_account',
+  ],
+  'GET:/me/confirm' => [
+    'controller' => 'AccountController@confirm',
   ],
   'GET:/moderation' => [
     'controller' => 'IndexController@moderation',

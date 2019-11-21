@@ -1,7 +1,7 @@
 <?php if($thread->isLocked()) { ?>
 <div class="lock-message">
 This thread has been locked for <?php echo $thread->lock()->duration ?>. See the last post for reason why.
-<?php if($auth->user()->didIModerateThis($thread->category_id) ) { ?>
+<?php if($auth->isLoggedIn() && $auth->user()->didIModerateThis($thread->category_id) ) { ?>
 <a href="/thread/unlock?id=<?php echo $thread->id ?>">Unlock this thread</a>
 <?php } ?>
 </div>
@@ -71,7 +71,7 @@ This thread has been locked for <?php echo $thread->lock()->duration ?>. See the
                       <a class="forum-post-footer-action" @click="report(<?php echo $post->id ?>)">Report Abuse</a>
                      <?php } ?>
                    <?php } ?>
-                   <?php if($auth->user()->didIModerateThis($thread->category()->id) ) { ?>
+                   <?php if($auth->user()->didIModerateThis($thread->category()->id) || $auth->user()->is_admin ) { ?>
                      <a class="forum-post-footer-action" @click="moderate(<?php echo $post->id ?>)">Moderate</a>
                    <?php } ?> 
                  <?php } ?>
@@ -92,16 +92,19 @@ var threadapp = new Vue({
       $.ajax("<?php echo $root ?>/thread/editor?thread=<?php echo $thread->id ?>&reply="+post_id).done(function(data) {
         $("#editor").html(data);
       });
+      window.location.hash = "#editor";
     },
     edit(post_id) {
       $.ajax("<?php echo $root ?>/thread/editor?thread=<?php echo $thread->id ?>&edit="+post_id).done(function(data) {
         $("#editor").html(data);
       });
+      window.location.hash = "#editor";
     },
     delete_post(post_id) {
       $.ajax("<?php echo $root ?>/thread/editor?thread=<?php echo $thread->id ?>&delete="+post_id).done(function(data) {
         $("#editor").html(data);
       });
+      window.location.hash = "#editor";
     },
     favorite(post_id) {
       $.ajax("<?php echo $root ?>/api/favorite?id="+post_id).done(function(data) {
@@ -113,11 +116,13 @@ var threadapp = new Vue({
       $.ajax("<?php echo $root ?>/thread/editor?thread=<?php echo $thread->id ?>&report="+post_id).done(function(data) {
         $("#editor").html(data);
       });
+      window.location.hash = "#editor";
     },
     moderate(post_id) {
       $.ajax("<?php echo $root ?>/thread/moderating_editor?id="+post_id).done(function(data) {
         $("#editor").html(data);
       });
+      window.location.hash = "#editor";
     }
   },  
 });

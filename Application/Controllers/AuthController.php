@@ -78,7 +78,7 @@ class AuthController {
            $email = new MailBuilder();
            $body = "Thank you for registering with metaforums.\n";
            $body .= "To be able to explore the vast forum, use the URL below:\n\n";
-           $body .= $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'].'/signup/confirm?'.$confirmator->confirm_key;
+           $body .= $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'].'/email/confirm?'.$confirmator->confirm_key;
            $email->from("metaforums@nanao.moe")->to($data->email)->subject("Complete your registration on Metaforums")->body($body);
            ServiceContainer::Email()->send($email);
            if($confirmator != null) {

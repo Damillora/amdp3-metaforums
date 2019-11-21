@@ -29,6 +29,28 @@ $view->include('layouts/head');
     </div>
    
   </form>
+  <form method="POST" action="/me/update-account" enctype="multipart/form-data">
+    <div class="input-group">
+      <label for="NewPassword">Change Password</label>
+      <input id="NewPassword" type="password" name="newpassword" value="" placeholder="new password">
+      <input id="ConfirmPassword" type="password" name="confirmpassword" value="" placeholder="confirm new password">
+    </div>
+    <div class="input-group">
+      <label for="Email">Email</label>
+      <input id="Email" type="text" name="email" value="<?php echo $user->email ?>" placeholder="email">
+    </div>
+    <div class="input-group">
+      <label for="Delete">Delete Account</label>
+      <input id="Delete" type="text" name="delete" value="" placeholder="input your username to confirm">
+    </div>
+    <div class="input-group">
+      <label for="Password">Current Password</label>
+      <input id="Password" type="password" name="password" value="" placeholder="current password">
+    </div>
+    <div class="input-group">
+      <button type="submit">Save</button>
+    </div>
+  </form>
 </div>
 
 <script src="/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>

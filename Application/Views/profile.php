@@ -5,8 +5,8 @@ $view->include('layouts/head');
 <div class="forum-post" id="forum-post-<?php echo $post->id ?>">
             <div class="forum-post-title">
               <p class="text-lg flex-grow"><?php echo $user->username ?>'s profile</p>
-              <?php if ($auth->isLoggedIn() && $auth->user()->id == $user->id) { ?>
-              <p class="text-lg px-2"><a href="/me">Edit</a></p>
+              <?php if ($auth->isLoggedIn() && ($auth->user()->id == $user->id) ) { ?>
+              <p class="text-lg px-2"><a class="text-white" href="/me">Edit</a></p>
               <?php } ?>
             </div>
             <div class="forum-post-content">
@@ -50,7 +50,7 @@ $view->include('layouts/head');
                       </tr>
                       <tr>
                         <td>Most Active In</td>
-                        <td><?php echo $user->most_active()->category_name ?> (<?php echo $user->most_active()->group()->group_name ?>)</td>
+                        <td><?php echo $user->most_active()->category_name ?? "None" ?> (<?php echo $user->most_active() ? $user->most_active()->group()->group_name : "None" ?>)</td>
                       </tr>
                       <tr>
                         <td>Number of Hearts</td>

@@ -9,6 +9,7 @@ use Application\Models\Post;
 use Application\Models\Thread;
 use Application\Models\UserAction;
 use Application\Models\UserReport;
+use Application\Models\User;
 use Application\Foundations\QueryBuilder;
 use Application\Foundations\MailBuilder;
 
@@ -82,18 +83,18 @@ class ForumThreadController {
             'post_id' => $request->report,
             'report_date' => date('Y-m-d H:i:s'),
           ]);
-           if($user->didIModerateThis($category->id)) {
+           if($report->user()->didIModerateThis($category->id)) {
              $query = new QueryBuilder();
              $query = $query->where('role','>=','100000');
              $admins = User::select($query);
              foreach($admins as $moderator) {
                $email = new MailBuilder();
                $body = "Dear ".$moderator->username."\n";
-               $body .= "Someone reported ".$report->user()->username.", a moderator for ".$category->category_name." for alleged violation of the rules.\n\n";
+               $body .= $user->username." reported ".$report->user()->username.", a moderator for ".$category->category_name." for alleged violation of the rules.\n\n";
                $body .= "Reason:\n\n";
                $body .= $request->content."\n\n";
                $body .= "Please resolve this via the moderation interface.\n";
-               $email->from("metaforums@nanao.moe")->to($moderator->email)->subject("New report: ".$user->username)->body($body);
+               $email->from("metaforums@nanao.moe")->to($moderator->email)->subject("New report: ".$report->user()->username)->body($body);
                ServiceContainer::Email()->send($email);
              }
            } else {

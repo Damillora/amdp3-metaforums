@@ -32,10 +32,10 @@ class ApiController {
         $bans = $this->getBans();
         $where = new QueryBuilder();
         $where = $where->where('group_id',$request->id);
-        $categories = Category::select($where);
         if(count($bans) > 0) {
             $where = $where->whereNotIn('id',$bans);
         }
+        $categories = Category::select($where);
         return $response->json()->data($categories);
     }
     public function threads(Request $request, Response $response) {
