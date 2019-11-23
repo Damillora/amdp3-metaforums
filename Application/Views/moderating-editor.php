@@ -28,7 +28,12 @@
               </div>
               <div class="forum-post-footer-mid">
                 <select name="duration">
+                  <option value="+ 1 hour">1 hours</option>
                   <option value="+ 6 hour">6 hours</option>
+                  <option value="+ 24 hour">24 hours</option>
+                  <option value="+ 72 hour">3 days</option>
+                  <option value="+ 7 day">1 week</option>
+                  <option value="+ 30 day">1 month</option>
                   <option value="2099-12-31 23:59">indefinitely</option>
                 </select>
                 <select name="action">

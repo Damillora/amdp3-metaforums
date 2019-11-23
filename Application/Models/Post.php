@@ -28,4 +28,10 @@ class Post extends DBModel {
         $id = Thread::find($this->thread_id)->main_post->id;
         return ($id == $this->id);
     }
+    public function is_favorited() {
+        $query = new QueryBuilder();
+        $query = $query->where('user_id',ServiceContainer::Authentication()->user()->id)->where('post_id',$this->id);
+        $is_fav = UserFavorite::selectOne($query);
+        return isset($is_fav);
+    }
 }

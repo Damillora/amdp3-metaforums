@@ -63,16 +63,16 @@ This thread has been locked for <?php echo $thread->lock()->duration ?>. See the
                    <?php if($post->user_id == $auth->user()->id) { ?>
                      <a class="forum-post-footer-action" @click="reply(<?php echo $post->id ?>)">Reply</a>
                      <a class="forum-post-footer-action" @click="edit(<?php echo $post->id ?>)">Edit</a>
-                     <a class="forum-post-footer-action" @click="delete_post(<?php echo $post->id ?>)">Delete</a>
+                     <a class="forum-post-footer-action danger" @click="delete_post(<?php echo $post->id ?>)">Delete</a>
                    <?php } else { ?>
-                     <a class="forum-post-footer-action" @click="favorite(<?php echo $post->id ?>)">Favorite</a>
+                     <a class="forum-post-footer-action" @click="favorite(<?php echo $post->id ?>)"><?php echo $post->is_favorited() ? 'Unfavorite' : 'Favorite' ?></a>
                      <a class="forum-post-footer-action" @click="reply(<?php echo $post->id ?>)">Reply</a>
                      <?php if(!$auth->user()->didIModerateThis($thread->category()->id) && $auth->user()->is_confirmed ) { ?>
-                      <a class="forum-post-footer-action" @click="report(<?php echo $post->id ?>)">Report Abuse</a>
+                      <a class="forum-post-footer-action danger" @click="report(<?php echo $post->id ?>)">Report Abuse</a>
                      <?php } ?>
                    <?php } ?>
                    <?php if($auth->user()->didIModerateThis($thread->category()->id) || $auth->user()->is_admin ) { ?>
-                     <a class="forum-post-footer-action" @click="moderate(<?php echo $post->id ?>)">Moderate</a>
+                     <a class="forum-post-footer-action danger" @click="moderate(<?php echo $post->id ?>)">Moderate</a>
                    <?php } ?> 
                  <?php } ?>
               </div>
