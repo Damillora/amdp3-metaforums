@@ -115,6 +115,14 @@ The database used is MariaDB 10.4.8
 
 ## External frontend libraries used
 
+### Vue.js
+
+Vue.js is a progressive, incrementally-adoptable JavaScript framework for building UI on the web
+
+Vue.js allows for interactivity while being less cumbersome than manipulating the DOM manually e.g. with jQuery.
+
+[Project Website](https://vuejs.org)
+
 ### jQuery
 
 jQuery is a feature-rich JavaScript library.
